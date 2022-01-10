@@ -5,7 +5,7 @@
 #include "idx_tensor.h"
 #include "../tensor/untyped_tensor.h"
 #ifdef _OPENMP
-#include "omp.h"
+#include <omp.h>
 #endif
 
 namespace CTF_int {
@@ -1861,7 +1861,7 @@ NORM_INFTY_INST(double)
     Sparse_Tensor<dtype> stsr(indices,this);
     return stsr;
   }
- 
+
   template<typename dtype>
   std::vector<CTF::Matrix<dtype>*> Tensor<dtype>::to_matrix_batch(){
     IASSERT(this->order == 3);
@@ -1875,14 +1875,14 @@ NORM_INFTY_INST(double)
     }
     return submats;
   }
- 
+
   template<typename dtype>
   void Tensor<dtype>::reassemble_batch(std::vector<CTF_int::tensor*> subtsrs){
     for (int64_t i=0; i<(int64_t)subtsrs.size(); i++){
       sr->copy(this->data + sr->el_size*i*subtsrs[0]->size, subtsrs[i]->data, subtsrs[0]->size);
     }
   }
-      
+
   template<typename dtype>
   void Tensor<dtype>::svd_batch(Tensor<dtype> & U, Matrix<dtype> & S, Tensor<dtype> & VT, int rank){
     int64_t srank = rank == 0 ? std::min(this->lens[0], this->lens[1]) : rank;
@@ -1915,7 +1915,7 @@ NORM_INFTY_INST(double)
         pe_grid_inds[i] = 'k';
       }
     }
-    
+
     //need to predefine this way to ensure all tensors are blocked the same way over k, so that their slices live on the same subworlds
     U = Tensor<dtype>(3,U_lens,NULL,*this->wrld,"ijk",pe_grid[pe_grid_inds],Idx_Partition(),NULL,0,*this->sr);
     S = Matrix<dtype>(srank,this->lens[2],"jk",pe_grid[pe_grid_inds],Idx_Partition(),0,*this->wrld,*this->sr);

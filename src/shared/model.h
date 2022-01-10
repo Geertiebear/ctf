@@ -2,7 +2,7 @@
 #define __MODEL_H__
 
 #ifdef CRITTER
-#include "critter.h"
+#include <critter.h>
 #else
 #include <mpi.h>
 #endif

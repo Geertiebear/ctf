@@ -7,12 +7,9 @@
 #include <limits>
 #include <inttypes.h>
 #include "../shared/memcontrol.h"
-#ifdef _OPENMP
-#include "omp.h"
-#endif
 
 #ifdef _OPENMP
-#include "omp.h"
+#include <omp.h>
 #endif
 namespace CTF {
   /**
@@ -128,7 +125,7 @@ namespace CTF_int {
     int * scoo_rs = (int*)CTF_int::alloc(sizeof(int)*nz);
     memcpy(scoo_rs, coo_rs, nz*sizeof(int));
     std::sort(scoo_rs,scoo_rs+nz);
-    #pragma omp parallel 
+    #pragma omp parallel
     {
       int tid = omp_get_thread_num();
       int ntd = omp_get_num_threads();
@@ -759,19 +756,19 @@ namespace CTF {
     }
 
     CTF_int::bivar_function * get_elementwise_smaller() const {
-      return new Bivar_Function<dtype,dtype,bool>([](dtype a, dtype b){ return !CTF_int::default_isequal<dtype>(CTF_int::default_max<dtype,is_ord>(a,b), a);});  
+      return new Bivar_Function<dtype,dtype,bool>([](dtype a, dtype b){ return !CTF_int::default_isequal<dtype>(CTF_int::default_max<dtype,is_ord>(a,b), a);});
     }
 
     CTF_int::bivar_function * get_elementwise_smaller_or_equal() const {
-      return new Bivar_Function<dtype,dtype,bool>([](dtype a, dtype b){ return CTF_int::default_isequal<dtype>(CTF_int::default_max<dtype,is_ord>(a,b), b);});  
+      return new Bivar_Function<dtype,dtype,bool>([](dtype a, dtype b){ return CTF_int::default_isequal<dtype>(CTF_int::default_max<dtype,is_ord>(a,b), b);});
     }
 
     CTF_int::bivar_function * get_elementwise_is_equal() const {
-      return new Bivar_Function<dtype,dtype,bool>([](dtype a, dtype b){ return CTF_int::default_isequal<dtype>(a, b);});  
+      return new Bivar_Function<dtype,dtype,bool>([](dtype a, dtype b){ return CTF_int::default_isequal<dtype>(a, b);});
     }
 
     CTF_int::bivar_function * get_elementwise_is_not_equal() const {
-      return new Bivar_Function<dtype,dtype,bool>([](dtype a, dtype b){ return !CTF_int::default_isequal<dtype>(a, b);});  
+      return new Bivar_Function<dtype,dtype,bool>([](dtype a, dtype b){ return !CTF_int::default_isequal<dtype>(a, b);});
     }
 
 /*

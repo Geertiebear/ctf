@@ -13,7 +13,7 @@
 #ifndef __APPLE__
 #ifndef OMP_OFF
 #define USE_OMP
-#include "omp.h"
+#include <omp.h>
 #endif
 #endif
 
@@ -65,7 +65,7 @@ namespace CTF_int {
 namespace CTF_int {
   //max total virtualization factor for mappings
   #define MAX_NVIRT 256
-  //min total virtualization factor for mappings 
+  //min total virtualization factor for mappings
   // (would be useful if explicit blockwise threading was enabled, which is not currently)
   #ifndef MIN_NVIRT
   #define MIN_NVIRT 1
@@ -104,7 +104,7 @@ namespace CTF_int {
   #define LOOP_MAX_ORD(F,...) \
     F(0,__VA_ARGS__) F(1,__VA_ARGS__) F(2,__VA_ARGS__) F(3,__VA_ARGS__) \
     F(4,__VA_ARGS__) F(5,__VA_ARGS__) F(6,__VA_ARGS__) F(7,__VA_ARGS__) \
-    F(8,__VA_ARGS__) F(9,__VA_ARGS__) F(10,__VA_ARGS__) F(11,__VA_ARGS__) 
+    F(8,__VA_ARGS__) F(9,__VA_ARGS__) F(10,__VA_ARGS__) F(11,__VA_ARGS__)
 
   #define ORD_CASE(ord,F,...) \
     case ord: \
@@ -137,7 +137,7 @@ namespace CTF_int {
   #ifdef CTF_COUNT_FLOPS
   #define CTF_FLOPS_ADD(n) CTF_int::add_computed_flops(n)
   #else
-  #define CTF_FLOPS_ADD(n) 
+  #define CTF_FLOPS_ADD(n)
   #endif
 
   //doesn't work with OpenMPI
@@ -302,8 +302,8 @@ namespace CTF_int {
    *        therefore (idx*sg!)^(1/sg) >= n-sg
    *        or similarly in the SY case ... >= n
    *
-   * \param[in] order number of dimensions in the tensor 
-   * \param[in] lens edge lengths 
+   * \param[in] order number of dimensions in the tensor
+   * \param[in] lens edge lengths
    * \param[in] sym symmetry
    * \param[in] idx index in the global tensor, in packed format
    * \param[out] idx_arr preallocated to size order, computed to correspond to idx
@@ -414,7 +414,7 @@ namespace CTF_int {
       }
     }
   }
- 
+
   /**
    * \brief permute an array
    *
@@ -427,7 +427,7 @@ namespace CTF_int {
                int *       arr);
 
   /**
-   * \brief permutes a permutation array 
+   * \brief permutes a permutation array
    *
    * \param order number of elements in perm
    * \param perm permutation array
@@ -437,7 +437,7 @@ namespace CTF_int {
                       int const * perm,
                       int *       arr);
 
- 
+
   /**
    * \brief permute an array
    *
@@ -450,7 +450,7 @@ namespace CTF_int {
                int64_t *   arr);
 
   /**
-   * \brief permutes a permutation array 
+   * \brief permutes a permutation array
    *
    * \param order number of elements in perm
    * \param perm permutation array
@@ -481,8 +481,8 @@ namespace CTF_int {
               char *          b);
 
 
-  int64_t fact(int64_t n);  
-  int64_t choose(int64_t n, int64_t k);  
+  int64_t fact(int64_t n);
+  int64_t choose(int64_t n, int64_t k);
   void get_choice(int n, int k, int ch, int64_t * chs);
   int64_t chchoose(int64_t n, int64_t k);
 
